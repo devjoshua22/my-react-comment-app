@@ -50,6 +50,10 @@ const CommentItem = ({ comment, currentUser, onReply, replyingTo, parentId = nul
   setShowDelete(false);
 };
 
+// centralized show/hide for delete modal
+const handleShowDelete = () => setShowDelete(true);
+const handleHideDelete = () => setShowDelete(false);
+
  // use edit logic
     const editMutation = useEditComment();
 
@@ -67,6 +71,9 @@ const handleUpdate = () => {
   return (
     
       <div id="comment"   className="flex flex-wrap w-cBox gap-3 text-gray-500 font-medium rounded-md justify-center items-center lg:w-fullBox Xlg:w-maxim "  >
+  {showDelete && (
+    <DeleteModal onConfirm={handleDelete} onCancel={handleHideDelete} />
+  )}
   <div key={comment.id}   className={` bg-white rounded-md p-3  h-fit  transition lg:flex lg:justify-stretch gap-3 items-center    lg:h-deskHeight
     ${isActiveReply ? "ring-2 ring-DarkPurple-600" : ""} ${!comment.replies? "w-rBox lg:w-rBoxDesktop lg:h-36 Xlg:w-cBoxDesktop" :"w-cBoxDesktop Xlg:w-maxim"}
   `}>
@@ -83,7 +90,7 @@ const handleUpdate = () => {
        <p className=" hidden lg:">{comment.createdAt}</p>
       </div>
       {comment.user.username === currentUser.username && (
-        <div className=" lg:flex flex-nowrap items-center justify-between w-52 hidden">
+  <div className=" lg:flex flex-nowrap items-center justify-between w-52 hidden">
         <span className="ml-2 bg-DarkPurple-600  text-white text-xs p-1 rounded">
         you
         </span>
@@ -91,7 +98,7 @@ const handleUpdate = () => {
             <img src="/images/icon-edit.svg" alt="" className="" />
             <span className=" text-DarkPurple-600  font-bold text-lg">Edit</span>
         </button>
-        <button  onClick={() => setShowDelete(true) } className=" flex flex-nowrap items-center gap-1 cursor-pointer">
+  <button  onClick={() =>{console.log("DELETE CLICKED", comment.id, parentId); handleShowDelete()}   } className=" flex flex-nowrap items-center gap-1 cursor-pointer">
             <img src="/images/icon-delete.svg" alt="" className="" />
             <span className=" text-LazyPink-400 font-bold text-lg">Delete</span>
             </button>
@@ -144,17 +151,12 @@ const handleUpdate = () => {
     {!isEditing && <section className="flex flex-nowrap justify-between lg:hidden">
          <VoteBox score={score} onVote={handleVote} userVote={userVote} />
           {isCurrentUser && (
-            <button  onClick={() => setShowDelete(true) } className=" flex flex-nowrap items-center gap-1 cursor-pointer">
+            <button  onClick={() =>{console.log("DELETE CLICKED", comment.id, parentId); handleShowDelete()}   } className=" flex flex-nowrap items-center gap-1 cursor-pointer">
             <img src="/images/icon-delete.svg" alt="" className="" />
             <span className=" text-LazyPink-400 font-bold text-lg">Delete</span>
             </button>
         )}
-          {showDelete && (
-            <DeleteModal
-              onConfirm={handleDelete}
-              onCancel={() => setShowDelete(false)}
-            />
-          )}
+        
 
 
           {isCurrentUser && (

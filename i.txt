@@ -1,0 +1,11 @@
+my component tree
+
+App
+ ├─ CommentList        (fetch comments – server state)
+ │   └─ CommentItem
+ │        ├─ VoteBox
+ │        ├─ ReplyButton
+ │        ├─ ReplyList
+ │        └─ DeleteModal
+ │        └─ EditModal
+ └─ CommentInput       (UI state – input, replyingTo)

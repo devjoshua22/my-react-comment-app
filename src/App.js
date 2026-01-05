@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import CommentInput from "./CommentInput";
+import CommentList from "./CommentList";
+import { useState } from "react";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   const [replyingTo, setReplyingTo] = useState(null);
+   const handleReplyToggle = (comment) => {
+    setReplyingTo(prev =>
+     prev?.id === comment.id ? null : comment
+    );
+    };
+   
+
+    return (
+ <div className=" w-screen-sm  flex flex-wrap align-middle justify-center gap-4 bg-gray-100 h-full overflow-hidden p-6 lg:w-screen  Xlg:w-full  ">
+        <CommentList onReply={handleReplyToggle} replyingTo={replyingTo}  />
+       <CommentInput replyingTo={replyingTo} setReplyingTo={setReplyingTo} />
     </div>
   );
 }
 
 export default App;
+
+
+

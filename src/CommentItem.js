@@ -87,30 +87,21 @@ const handleUpdate = () => {
       )}
        <span className=" flex flex-wrap items-center justify-between  text-gray-800 font-semibold text-base gap-2">
       <div className="  text-gray-800 font-semibold text-lg">{comment.user?.username}
-        {comment.user.username === currentUser.username && (<span className="ml-2 bg-DarkPurple-600 lg:hidden  text-white text-xs p-1 rounded">
-        you
-        </span>)}
        <p className=" hidden lg:">{comment.createdAt}</p>
       </div>
       {comment.user.username === currentUser.username && (
-  <div className=" lg:flex flex-nowrap items-center justify-between w-52 hidden">
-        <span className="ml-2 bg-DarkPurple-600  text-white text-xs p-1 rounded">
-        you
-        </span>
-        < button className=" flex flex-nowrap items-center gap-1 cursor-pointer" onClick={() => setIsEditing(true)}>
+        <div className=" lg:flex flex-nowrap items-center justify-between w-52 hidden">
+          <span className="ml-2 bg-DarkPurple-600  text-white text-xs p-1 rounded">you</span>
+          <button className=" flex flex-nowrap items-center gap-1 cursor-pointer" onClick={() => setIsEditing(true)}>
             <img src="/images/icon-edit.svg" alt="" className="" />
             <span className=" text-DarkPurple-600  font-bold text-lg">Edit</span>
-        </button>
-  <button  onClick={() =>{console.log("DELETE CLICKED", comment.id, parentId); handleShowDelete()}   } className=" flex flex-nowrap items-center gap-1 cursor-pointer">
+          </button>
+          <button onClick={() => { console.log("DELETE CLICKED", comment.id, parentId); handleShowDelete(); }} className=" flex flex-nowrap items-center gap-1 cursor-pointer">
             <img src="/images/icon-delete.svg" alt="" className="" />
             <span className=" text-LazyPink-400 font-bold text-lg">Delete</span>
-            </button>
+          </button>
         </div>
-        
-      
-        
-        
-    )}
+  )}
       </span>
 
       

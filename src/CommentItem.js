@@ -87,6 +87,11 @@ const handleUpdate = () => {
       )}
        <span className=" flex flex-wrap items-center justify-between  text-gray-800 font-semibold text-base gap-2">
       <div className="  text-gray-800 font-semibold text-lg">{comment.user?.username}
+         {comment.user.username === currentUser.username && (
+          <span className="ml-2 bg-DarkPurple-600  text-white text-xs p-1 rounded lg:hidden">
+        you
+        </span>
+         )}
        <p className=" hidden lg:">{comment.createdAt}</p>
       </div>
       {comment.user.username === currentUser.username && (
